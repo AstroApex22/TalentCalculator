@@ -2,46 +2,102 @@
   <title>Talent Calculator for WoW</title>
 </head>
 
-<div class="classSelector">
-    <p>Select a class</p>
-    <div style="text-align:center">
-        <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Druid.png" alt="Druid" title="Druid">
-        <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Hunter.png" alt="Hunter" title="Hunter">
-        <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Mage.png" alt="Mage" title="Mage">
-        <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Paladin.png" alt="Paladin" title="Paladin">
-        <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Priest.png" alt="Priest" title="Priest">
-        <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Rogue.png" alt="Rogue" title="Rogue">
-        <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Shaman.png" alt="Shaman" title="Shaman">
-        <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Warlock.png" alt="Warlock" title="Warlock">
-        <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Warrior.png" alt="Warrior" title="Warrior">
-    </div>
+<div class="classSelector" id="classSelector">
+  <p>Select a class</p>
+  <div class="classContainer">
+    <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Druid.png" alt="Druid" title="Druid">
+    <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Hunter.png" alt="Hunter" title="Hunter">
+    <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Mage.png" alt="Mage" title="Mage">
+    <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Paladin.png" alt="Paladin" title="Paladin">
+    <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Priest.png" alt="Priest" title="Priest">
+    <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Rogue.png" alt="Rogue" title="Rogue">
+    <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Shaman.png" alt="Shaman" title="Shaman">
+    <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Warlock.png" alt="Warlock" title="Warlock">
+    <img src="https://raw.githubusercontent.com/AstroApex22/TalentCalculator/main/assets/classes/Warrior.png" alt="Warrior" title="Warrior">
+  </div>
 </div>
 
+<div id="classInfoContainer">
+  <div id="druidInfo" class="classInfo hidden">Druid information here</div>
+  <div id="hunterInfo" class="classInfo hidden">Hunter information here</div>
+  <div id="mageInfo" class="classInfo hidden">Mage information here</div>
+  <div id="paladinInfo" class="classInfo hidden">Paladin information here</div>
+  <div id="priestInfo" class="classInfo hidden">Priest information here</div>
+  <div id="rogueInfo" class="classInfo hidden">Rogue informationn here</div>
+  <div id="shamanInfo" class="classInfo hidden">Shaman information here</div>
+  <div id="warlockInfo" class="classInfo hidden">Warlock information here</div>
+  <div id="warriorInfo" class="classInfo hidden">Warrior information here</div>
+</div>
+
+<script>
+  const selector = document.getElementById('classSelector');
+  const container = document.querySelector('.classContainer');
+  const classInfoContainer = document.getElementById('classInfoContainer');
+
+  selector.addEventListener('click', (event) => {
+    if (event.target.tagName === 'IMG') {
+      const selectedClass = event.target.alt.toLowerCase();
+      displayClassInfo(selectedClass);
+    }
+  });
+
+  function displayClassInfo(selectedClass) {
+    hideAllClassInfo();
+    const selectedClassInfoDiv = document.getElementById(`${selectedClass}Info`);
+    selectedClassInfoDiv.classList.remove('hidden');
+  }
+
+  function hideAllClassInfo() {
+    const classInfoDivs = classInfoContainer.querySelectorAll('.classInfo');
+    classInfoDivs.forEach((div) => {
+      div.classList.add('hidden');
+    });
+  }
+</script>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-  body {
-    font-family: 'Lato', sans-serif;
+  .hidden {
+    display: none;
   }
-  .classSelector {
-    width:600px;
-    height:170px;
-    border-radius:10px;
-    margin:auto;
-    background: rgb(131,58,180);
-    background: linear-gradient(49deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,117,53,1) 80%, rgba(252,176,69,1) 100%);
-  }
-  .classSelector p {
-      color:white;
-      font-size:50px;
-      text-align:center;
-      font-weight:bold;
-      padding-top:20px;
-  }
-  .classSelector img {
-      display:inline;
-      width:50px;
-      height:50px;
-      border-radius:10px;
-      margin-top:-40px;
-  }
-</style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+    body {
+      font-family: 'Lato', sans-serif;
+    }
+    .classSelector {
+      width: 600px;
+      height: 170px;
+      border-radius: 10px;
+      margin: auto;
+      background: rgb(131, 58, 180);
+      background: linear-gradient(49deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 117, 53, 1) 80%, rgba(252, 176, 69, 1) 100%);
+      overflow: hidden;
+    }
+    .classSelector p {
+      color: white;
+      font-size: 50px;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+    .classSelector img {
+      display: inline;
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      margin-top: -40px;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+    .classContainer {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      transition: transform 0.3s ease-in-out;
+    }
+    .classContainer div {
+      text-align: center;
+      color: white;
+      font-size: 24px;
+      padding: 20px;
+    }
+  </style>
